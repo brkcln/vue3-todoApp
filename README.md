@@ -1,19 +1,31 @@
-# basic-todo
+# Basic Vue3 Todo
 
-## Project setup
-```
-npm install
-```
+Technologies used
+This project was built with the following technologies:
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- **Vue.js**: a JavaScript framework for building user interfaces
+- **Moment.js**: a JavaScript library for parsing, validating, and formatting dates
+- **uuid** : a JavaScript library for generating random IDs
+- **Local storage**: a web storage technology that allows data to be stored locally in a user's browser
 
-### Compiles and minifies for production
+### Getting started
+To run the app locally, follow these steps:
+Clone the repository
+Install the dependencies with ;
+```bash
+  npm run install
 ```
-npm run build
+Run the app with ; 
+```bash
+  npm run serve
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Features
+The todo app has the following features:
+- Create a new task
+- Edit an existing task
+- Mark a task as complete
+- Delete a task
+- Sort tasks by completion status and creation date
+- Save to LocalStorage
+## Credits
+This project was built by - brkcln
