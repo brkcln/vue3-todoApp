@@ -25,4 +25,4 @@ jobs:
         folder: dist
         enable-jekyll: true
         jekyll-build-command: npm run build
-        html-dir: public
+        publish_dir: ./public
