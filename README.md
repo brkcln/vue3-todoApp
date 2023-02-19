@@ -37,7 +37,7 @@ The todo app has the following features:
 - UI/UX Design,
 - Responsive Layout,
 - Add update_at to todos,
-- 3 List of todos, (Completed,) 
+- 3 List of todos,
 - And more..
 
 ## Credits
