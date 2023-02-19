@@ -8,6 +8,10 @@ This project was built with the following technologies:
 - **uuid** : a JavaScript library for generating random IDs
 - **Local storage**: a web storage technology that allows data to be stored locally in a user's browser
 
+### Live Demo
+
+- [Netlify](https://brkcln-todo.netlify.app/)
+
 ### Getting started
 To run the app locally, follow these steps:
 Clone the repository
@@ -27,5 +31,6 @@ The todo app has the following features:
 - Delete a task
 - Sort tasks by completion status and creation date
 - Save to LocalStorage
+
 ## Credits
 This project was built by - brkcln
