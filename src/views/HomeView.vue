@@ -3,13 +3,16 @@
 		<h1>Basic Todo</h1>
 		<sidebar></sidebar>
 		<div class="container">
-			<div class="d-flex flex-column gap-3 align-items-center">
-				<div class="form-group d-flex align-items-center gap-4">
-					<div class="d-flex flex-column gap-2">
-						<input type="text" v-model="todo.title" placeholder="What to do" class="form-control" />
-						<textarea name="desc" v-model="todo.desc" id="desc" cols="10" rows="5"></textarea>
+			<div class="row">
+				<div class="d-flex flex-column gap-3 align-items-center">
+					<div class="form-group bg-light p-4 rounded d-flex align-items-center gap-4">
+						<div class="d-flex flex-column gap-2">
+							<input type="text" v-model="todo.title" placeholder="What to do" class="form-control" />
+							<textarea name="desc" v-model="todo.desc" id="desc" cols="10" rows="5" class="form-control"></textarea>
+						</div>
+						<button class="btn btn-outline-primary d-flex" @click="addTodo"><i class="bi bi-plus"></i>Add</button>
 					</div>
-					<button class="btn btn-outline-primary d-flex" @click="addTodo"><i class="bi bi-plus"></i>Add</button>
+					<HelloWorld :todos="sortedTodos" @remove-todo="removeTodo" @check-todo="checkTodo"></HelloWorld>
 				</div>
 				<HelloWorld :todos="sortedTodos" @remove-todo="removeTodo" @check-todo="checkTodo"></HelloWorld>
 			</div>
@@ -66,14 +69,31 @@ export default {
 					isDone: false,
 					created_at: "",
 				};
+				this.$notify({
+					title: "Created",
+					text: "You Created New Todo Successfully !",
+					type: "Success",
+				});
 			}
 		},
 		removeTodo(id) {
 			this.todos = this.todos.filter((todo) => todo.id !== id);
+			this.$notify({
+				title: "Deleted",
+				text: "You Deleted Successfully !",
+				type: "Danger",
+			});
 		},
 		checkTodo(todo) {
 			todo.isDone = !todo.isDone;
 			console.log(todo);
+			if (todo.isDone) {
+				this.$notify({
+					title: "Done",
+					text: "You Finished The Todo !",
+					type: "Success",
+				});
+			}
 		},
 		editTodo(todo) {
 			todo.editing = true;

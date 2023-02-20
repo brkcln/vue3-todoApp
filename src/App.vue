@@ -1,4 +1,5 @@
 <template>
+	<notifications class="mt-4" :duration="1500" position="top right" />
 	<router-view />
 </template>
 

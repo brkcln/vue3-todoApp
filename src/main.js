@@ -7,5 +7,14 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import withUUID from "vue-uuid";
 import moment from "moment";
+import Notifications from '@kyvg/vue3-notification'
 
-createApp(App).use(store).use(withUUID).use(moment).use(router).mount("#app");
+
+const app = createApp(App)
+app.use(store)
+app.use(withUUID)
+app.use(moment)
+app.use(router)
+app.use(Notifications)
+app.mount("#app")
+

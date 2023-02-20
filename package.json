@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@firebase/auth": "^0.21.3",
+    "@kyvg/vue3-notification": "^2.9.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "core-js": "^3.8.3",
