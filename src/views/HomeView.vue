@@ -14,7 +14,6 @@
 					</div>
 					<HelloWorld :todos="sortedTodos" @remove-todo="removeTodo" @check-todo="checkTodo"></HelloWorld>
 				</div>
-				<HelloWorld :todos="sortedTodos" @remove-todo="removeTodo" @check-todo="checkTodo"></HelloWorld>
 			</div>
 		</div>
 	</div>
