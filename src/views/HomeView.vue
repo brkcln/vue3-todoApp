@@ -1,19 +1,16 @@
 <template>
-	<div>
-		<h1>Basic Todo</h1>
-		<sidebar></sidebar>
-		<div class="container">
-			<div class="row">
-				<div class="d-flex flex-column gap-3 align-items-center">
-					<div class="form-group bg-light p-4 rounded d-flex align-items-center gap-4">
-						<div class="d-flex flex-column gap-2">
-							<input type="text" v-model="todo.title" placeholder="What to do" class="form-control" />
-							<textarea name="desc" v-model="todo.desc" id="desc" cols="10" rows="5" class="form-control"></textarea>
-						</div>
-						<button class="btn btn-outline-primary d-flex" @click="addTodo"><i class="bi bi-plus"></i>Add</button>
+	<h1>Basic Todo</h1>
+	<div class="container">
+		<div class="row">
+			<div class="d-flex flex-column gap-3 align-items-center">
+				<div class="form-group bg-light p-4 rounded d-flex align-items-center gap-4">
+					<div class="d-flex flex-column gap-2">
+						<input type="text" v-model="todo.title" placeholder="What to do" class="form-control" />
+						<textarea name="desc" v-model="todo.desc" id="desc" cols="10" rows="5" class="form-control"></textarea>
 					</div>
-					<HelloWorld :todos="sortedTodos" @remove-todo="removeTodo" @check-todo="checkTodo"></HelloWorld>
+					<button class="btn btn-outline-primary d-flex" @click="addTodo"><i class="bi bi-plus"></i>Add</button>
 				</div>
+				<HelloWorld :todos="sortedTodos" @remove-todo="removeTodo" @check-todo="checkTodo"></HelloWorld>
 			</div>
 		</div>
 	</div>
@@ -24,11 +21,9 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import { v1 as uuidv1 } from "uuid";
 import moment from "moment";
-import Sidebar from "@/components/Sidebar.vue";
 export default {
 	components: {
 		HelloWorld,
-		Sidebar,
 	},
 	data() {
 		return {

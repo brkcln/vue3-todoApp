@@ -11,6 +11,14 @@ const routes = [
 		},
 	},
 	{
+		path: "/profile",
+		name: "profile",
+		component: () => import(/* webpackChunkName: "profile" */ "../views/user/Profile.vue"),
+		meta: {
+			requiresAuth: true,
+		},
+	},
+	{
 		path: "/register",
 		name: "register",
 		component: () => import(/* webpackChunkName: "register" */ "../views/auth/Register.vue"),
