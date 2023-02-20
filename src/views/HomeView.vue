@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<h1>Basic Todo</h1>
+		<sidebar></sidebar>
 		<div class="container">
 			<div class="row">
 				<div class="d-flex flex-column gap-3 align-items-center">
@@ -23,10 +24,11 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import { v1 as uuidv1 } from "uuid";
 import moment from "moment";
-
+import Sidebar from "@/components/Sidebar.vue";
 export default {
 	components: {
 		HelloWorld,
+		Sidebar,
 	},
 	data() {
 		return {

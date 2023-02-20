@@ -32,5 +32,14 @@ The todo app has the following features:
 - Sort tasks by completion status and creation date
 - Save to LocalStorage
 
+## Working on..
+- Adding Vuex,
+- UI/UX Design,
+- Responsive Layout,
+- Add update_at to todos,
+- SweetAlert when added,edited,deleted,
+- 3 List of todos,
+- And more..
+
 ## Credits
 This project was built by - brkcln
