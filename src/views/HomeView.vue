@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<h1>Basic Todo</h1>
+		<sidebar></sidebar>
 		<div class="container">
 			<div class="d-flex flex-column gap-3 align-items-center">
 				<div class="form-group d-flex align-items-center gap-4">
@@ -10,7 +11,6 @@
 					</div>
 					<button class="btn btn-outline-primary d-flex" @click="addTodo"><i class="bi bi-plus"></i>Add</button>
 				</div>
-
 				<HelloWorld :todos="sortedTodos" @remove-todo="removeTodo" @check-todo="checkTodo"></HelloWorld>
 			</div>
 		</div>
@@ -22,10 +22,11 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import { v1 as uuidv1 } from "uuid";
 import moment from "moment";
-
+import Sidebar from "@/components/Sidebar.vue";
 export default {
 	components: {
 		HelloWorld,
+		Sidebar,
 	},
 	data() {
 		return {
