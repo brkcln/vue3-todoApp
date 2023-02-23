@@ -7,6 +7,7 @@
 					<div class="d-flex flex-column gap-2">
 						<input type="text" v-model="todo.title" placeholder="What to do" class="form-control" />
 						<textarea name="desc" v-model="todo.desc" id="desc" cols="10" rows="5" class="form-control"></textarea>
+						<upload-image @file-selected="onFileSelected" />
 					</div>
 					<button class="btn btn-outline-primary d-flex" @click="addTodo"><i class="bi bi-plus"></i>Add</button>
 				</div>
@@ -17,16 +18,18 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import uploadImage from "@/components/uploadImage.vue";
 import { v1 as uuidv1 } from "uuid";
 import moment from "moment";
 import { db } from "@/firebase/firebase.js";
+import { getStorage, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
 
 export default {
 	components: {
 		HelloWorld,
+		uploadImage
 	},
 	data() {
 		return {
@@ -37,6 +40,7 @@ export default {
 				desc: "",
 				isDone: false,
 				editing: false,
+				imageUrl: "",
 			},
 		};
 	},
@@ -62,7 +66,27 @@ export default {
 					isDone: false,
 					created_at: new Date().toISOString(),
 					updated_at: null,
+					imageUrl: "",
 				});
+
+				if (this.todo.file) {
+					const file = this.todo.file;
+					const storage = getStorage();
+					const storagePath = `todos/${todoRef.id}/${file.name}`;
+					const storageRefPath = ref(storage, storagePath);
+
+					try {
+						await uploadBytes(storageRefPath, file);
+						const imageUrl = await getDownloadURL(storageRefPath);
+						await updateDoc(doc(db, "todos", todoRef.id), {
+							imageUrl: imageUrl,
+						});
+						this.todo.imageUrl = imageUrl;
+					} catch (error) {
+						console.error(error);
+					}
+				}
+
 				this.todos.push({ id: todoRef.id, ...this.todo });
 				this.todo = {
 					title: "",
@@ -70,6 +94,8 @@ export default {
 					isDone: false,
 					editing: false,
 					updated_at: null,
+					file: null,
+					imageUrl: "",
 				};
 				this.$notify({
 					title: "Created",
@@ -77,6 +103,11 @@ export default {
 					type: "Success",
 				});
 			}
+		},
+
+
+		onFileSelected(file) {
+			this.todo.file = file;
 		},
 		async removeTodo(id) {
 			await deleteDoc(doc(db, "todos", id));
@@ -101,6 +132,7 @@ export default {
 				isDone: todo.isDone,
 			});
 		},
+
 		async editTodoStart(todo) {
 			todo.editing = true;
 		},
