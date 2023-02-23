@@ -26,18 +26,18 @@ Run the app with ;
 ## Features
 The todo app has the following features:
 - Create a new task
-- Edit an existing task
+- Edit an existing task(still working)
 - Mark a task as complete
 - Delete a task
 - Sort tasks by completion status and creation date
-- Save to LocalStorage
+- Save to firebase
+- Upload image
+- SweetAlert when added,edited,deleted,
 
 ## Working on..
-- Adding Vuex,
 - UI/UX Design,
 - Responsive Layout,
 - Add update_at to todos,
-- SweetAlert when added,edited,deleted,
 - 3 List of todos,
 - And more..
 
