@@ -21,13 +21,16 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import { v1 as uuidv1 } from "uuid";
 import moment from "moment";
+import { db } from "@/firebase/firebase.js";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
+
 export default {
 	components: {
 		HelloWorld,
 	},
 	data() {
 		return {
-			todos: JSON.parse(localStorage.getItem("todos") || "[]"),
+			todos: [],
 			todo: {
 				id: "",
 				title: "",
@@ -51,17 +54,22 @@ export default {
 		},
 	},
 	methods: {
-		addTodo() {
+		async addTodo() {
 			if (this.todo.title.trim() !== "" && this.todo.desc.trim() !== "") {
-				this.todo.id = this.$uuid.v1();
-				this.todo.created_at = moment().format("YYYY-MM-DD HH:mm:ss");
-				this.todos.push(this.todo);
+				const todoRef = await addDoc(collection(db, "todos"), {
+					title: this.todo.title,
+					desc: this.todo.desc,
+					isDone: false,
+					created_at: new Date().toISOString(),
+					updated_at: null,
+				});
+				this.todos.push({ id: todoRef.id, ...this.todo });
 				this.todo = {
-					id: this.$uuid.v1(),
 					title: "",
 					desc: "",
 					isDone: false,
-					created_at: "",
+					editing: false,
+					updated_at: null,
 				};
 				this.$notify({
 					title: "Created",
@@ -70,7 +78,8 @@ export default {
 				});
 			}
 		},
-		removeTodo(id) {
+		async removeTodo(id) {
+			await deleteDoc(doc(db, "todos", id));
 			this.todos = this.todos.filter((todo) => todo.id !== id);
 			this.$notify({
 				title: "Deleted",
@@ -78,7 +87,7 @@ export default {
 				type: "Danger",
 			});
 		},
-		checkTodo(todo) {
+		async checkTodo(todo) {
 			todo.isDone = !todo.isDone;
 			console.log(todo);
 			if (todo.isDone) {
@@ -88,12 +97,34 @@ export default {
 					type: "Success",
 				});
 			}
+			await updateDoc(doc(db, "todos", todo.id), {
+				isDone: todo.isDone,
+			});
 		},
-		editTodo(todo) {
+		async editTodoStart(todo) {
 			todo.editing = true;
+		},
+		async editTodoEnd(todo) {
 			todo.title = todo.title.trim();
 			todo.desc = todo.desc.trim();
+			todo.editing = false;
+			await updateDoc(doc(db, "todos", todo.id), {
+				title: todo.title,
+				desc: todo.desc,
+			});
+			this.$notify({
+				title: "Edited",
+				text: "You Edited The Todo !",
+				type: "Success",
+			});
 		},
+	},
+	async created() {
+		const todosCollection = collection(db, "todos");
+		const querySnapshot = await getDocs(todosCollection);
+		querySnapshot.forEach((doc) => {
+			this.todos.push({ id: doc.id, ...doc.data() });
+		});
 	},
 };
 </script>
