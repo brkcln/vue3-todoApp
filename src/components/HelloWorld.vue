@@ -6,7 +6,9 @@
 					<h3 :class="{ 'todo-completed': item.isDone }">{{ item.title }}</h3>
 					<span :class="{ 'todo-completed': item.isDone }"> {{ item.desc }}</span>
 					<span class="small text-muted text-italic">{{ item.created_at ? item.created_at : "" }}</span>
-					<img  v-if="item.imageUrl" :src="item.imageUrl" alt="images" class="img-fluid">
+					<a :href="item.imageUrl" target="_blank">
+					<img  v-if="item.imageUrl" :src="item.imageUrl" alt="images" class="img-fluid" style="max-height: 200px;">
+					</a>
 
 				</div>
 				<div v-else>
