@@ -1,9 +1,9 @@
 <template>
 	<div class="container">
-		<h1>User Profile</h1>
-		<div class="d-flex flex-column gap-3 align-items-center">
+		<h1 class="">User Profile</h1>
+		<div class="d-flex flex-column gap-4 align-items-center">
 			<div class="form-group">
-				<img :src="user.photoURL" id="img" disabled class="img-fluid rounded-5" width="150" height="150" />
+				<img :src="user.photoURL" id="img" class="img-fluid rounded-5" width="150" height="150" />
 			</div>
 			<div class="form-group">
 				<label for="name" class="form-label">Name</label>
