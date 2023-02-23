@@ -15,6 +15,7 @@
     "firebase": "^9.17.1",
     "firebaseui": "^0.600.0",
     "moment": "^2.29.4",
+    "onesignal": "^0.1.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vue-uuid": "^3.0.0",
