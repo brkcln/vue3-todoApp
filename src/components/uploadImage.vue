@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<label for="fileInput">Select Image:</label>
-		<input type="file" id="fileInput" @change="onFileSelected">
+		<input type="file" id="fileInput" accept="image/*" @change="onFileSelected">
 	</div>
 </template>
 
